@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('author_id')->constrained()->onDelete('cascade');
-            $table->year('publication_year');
+            $table->integer('publication_year'); // Cambiato da year a integer
             $table->string('isbn')->unique();
             $table->boolean('is_available')->default(true);
             $table->timestamps();
