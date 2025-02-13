@@ -30,5 +30,7 @@
     <main class="max-w-6xl mx-auto mt-6 px-4">
         @yield('content')
     </main>
+    
+    @stack('scripts')
 </body>
 </html>
