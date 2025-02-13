@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dettagli Libro')
+@section('title', 'Dettaglio Libro')
 
 @section('content')
 <div class="bg-white shadow-md rounded-lg">
@@ -13,7 +13,7 @@
                     <h3 class="text-lg font-semibold mb-2">Informazioni Generali</h3>
                     <div class="space-y-2">
                         <p><span class="font-medium">Titolo:</span> {{ $book->title }}</p>
-                        <p><span class="font-medium">Autore:</span> {{ $book->author->name }}</p>
+                        <p><span class="font-medium">Autore:</span> {{ $book->author_name }}</p>
                         <p><span class="font-medium">Anno di pubblicazione:</span> {{ $book->publication_year }}</p>
                         <p><span class="font-medium">ISBN:</span> {{ $book->isbn }}</p>
                         <p>
@@ -26,11 +26,11 @@
                     </div>
                 </div>
 
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Storico Prestiti</h3>
-                    @if($book->loans->count() > 0)
+                @if($loans->count() > 0)
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Storico Prestiti</h3>
                         <div class="space-y-4">
-                            @foreach($book->loans as $loan)
+                            @foreach($loans as $loan)
                                 <div class="border-l-4 border-green-500 pl-4">
                                     <p><span class="font-medium">Prestato a:</span> {{ $loan->borrower_name }}</p>
                                     <p><span class="font-medium">Data prestito:</span> {{ $loan->loan_date }}</p>
@@ -40,10 +40,8 @@
                                 </div>
                             @endforeach
                         </div>
-                    @else
-                        <p class="text-gray-500">Nessun prestito registrato per questo libro.</p>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
 

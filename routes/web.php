@@ -9,7 +9,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/books', [BookController::class, 'index'])->name('books.index');
-Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
-Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
-Route::get('/loans', [LoanController::class, 'index'])->name('loans.index');
+// Rotte per i libri
+Route::resource('books', BookController::class);
+
+// Rotte per gli autori
+Route::resource('authors', AuthorController::class);
+
+// Rotte per i prestiti
+Route::resource('loans', LoanController::class);
