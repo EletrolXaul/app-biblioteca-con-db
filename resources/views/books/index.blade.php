@@ -3,10 +3,10 @@
 @section('title', 'Lista Libri')
 
 @section('content')
-<div class="bg-white shadow-md rounded-lg">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold">Lista dei Libri</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Lista dei Libri</h2>
             <a href="{{ route('books.create') }}" 
                class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -24,28 +24,28 @@
         
         <div class="overflow-x-auto">
             <table class="min-w-full table-auto">
-                <thead class="bg-gray-50">
+                <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Titolo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Autore</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Anno</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Disponibile</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Azioni</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Titolo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Autore</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Anno</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Disponibile</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Azioni</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @foreach($books as $book)
-                        <tr>
-                            <td class="px-6 py-4">{{ $book->title }}</td>
-                            <td class="px-6 py-4">{{ $book->author_name }}</td>
-                            <td class="px-6 py-4">{{ $book->publication_year }}</td>
-                            <td class="px-6 py-4">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">{{ $book->title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">{{ $book->author_name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">{{ $book->publication_year }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                    {{ $book->is_available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ $book->is_available ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
                                     {{ $book->is_available ? 'Disponibile' : 'Non disponibile' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 space-x-3">
+                            <td class="px-6 py-4 whitespace-nowrap space-x-3">
                                 <a href="{{ route('books.show', $book->id) }}" 
                                    class="text-blue-600 hover:text-blue-900 inline-flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
