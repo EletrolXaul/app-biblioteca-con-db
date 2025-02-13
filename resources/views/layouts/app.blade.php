@@ -31,6 +31,7 @@
         @yield('content')
     </main>
     
+    <script src="{{ asset('js/book-validation.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

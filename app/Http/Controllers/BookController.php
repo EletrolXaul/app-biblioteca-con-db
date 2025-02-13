@@ -81,4 +81,52 @@ class BookController extends Controller
 
         return view('books.show', compact('book', 'loans'));
     }
+
+    public function edit($id)
+    {
+        $book = DB::table('books')
+            ->where('id', $id)
+            ->first();
+            
+        if (!$book) {
+            abort(404);
+        }
+
+        $authors = DB::table('authors')
+            ->select(['id', 'name'])
+            ->orderBy('name')
+            ->get();
+
+        return view('books.edit', compact('book', 'authors'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'author_id' => 'required|exists:authors,id',
+            'publication_year' => 'required|integer|min:1000|max:' . date('Y'),
+            'isbn' => 'required|regex:/^[0-9-]{10,13}$/|unique:books,isbn,' . $id,
+        ]);
+
+        DB::table('books')
+            ->where('id', $id)
+            ->update([
+                'title' => $validated['title'],
+                'author_id' => $validated['author_id'],
+                'publication_year' => $validated['publication_year'],
+                'isbn' => $validated['isbn'],
+                'updated_at' => now()
+            ]);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Libro aggiornato con successo');
+    }
+
+    public function destroy($id)
+    {
+        DB::table('books')->where('id', $id)->delete();
+        return redirect()->route('books.index')
+            ->with('success', 'Libro eliminato con successo');
+    }
 }
